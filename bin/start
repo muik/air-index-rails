@@ -1,0 +1,2 @@
+bin/start-rails
+bin/rerun-sidekiq

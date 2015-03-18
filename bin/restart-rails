@@ -1,0 +1,2 @@
+bin/stop-rails
+bin/start-rails
