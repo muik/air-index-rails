@@ -12,7 +12,7 @@ class RegionCrawler
     logger.info results
     for data in results
       region = Region.new(code: data[1], name: data[0],
-                 no: data[3], station_code: data[2])
+                 no: data[3].to_i, station_code: data[2])
       region.upsert
       StationCrawler.perform_async region.code, region.station_code, region.no
     end

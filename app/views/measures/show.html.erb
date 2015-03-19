@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Station:</strong>
+  <%= @measure.station %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @measure.time %>
+</p>
+
+<p>
+  <strong>Grade:</strong>
+  <%= @measure.grade %>
+</p>
+
+<p>
+  <strong>Index:</strong>
+  <%= @measure.index %>
+</p>
+
+<%= link_to 'Edit', edit_measure_path(@measure) %> |
+<%= link_to 'Back', measures_path %>

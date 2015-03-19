@@ -12,7 +12,7 @@
 
 <p>
   <strong>Region:</strong>
-  <%= @station.region %>
+  <%= link_to @station.region.name, @station.region %>
 </p>
 
 <p>
@@ -23,6 +23,11 @@
 <p>
   <strong>Address:</strong>
   <%= @station.address %>
+</p>
+
+<p>
+  <strong>Measures:</strong>
+  <%= link_to 'measures', station_measures_path(@station) %>
 </p>
 
 <%= link_to 'Edit', edit_station_path(@station) %> |

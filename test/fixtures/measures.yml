@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  station: MyString
+  time: MyString
+  grade: MyString
+  index: MyString
+
+two:
+  station: MyString
+  time: MyString
+  grade: MyString
+  index: MyString

@@ -19,9 +19,11 @@ class StationCrawler
     results = html.scan(/\)">([^<]+)<\/a><\/td>\s+\n.+vrmlSearch\('(\d+)', '(\d+)', '(\d+)'\)">([^<]+)/)
     for data in results
       region = Region.find data[2]
-      Station.new(code: data[1], name: data[0],
-                  no: data[3], address: data[4],
-                  region: region).upsert
+      station = Station.new(code: data[1], name: data[0],
+                  no: data[3].to_i, address: data[4],
+                  region: region)
+      station.upsert
+      MeasureCrawler.perform_async station.code
     end
   end
 end

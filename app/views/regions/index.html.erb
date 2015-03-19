@@ -1,15 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Regions</h1>
+<h1>Regions</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Code</th>
       <th>Name</th>
       <th>No</th>
       <th>Station code</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -20,9 +20,9 @@
         <td><%= region.name %></td>
         <td><%= region.no %></td>
         <td><%= region.station_code %></td>
-        <td><%= link_to 'Show', region %></td>
-        <td><%= link_to 'Edit', edit_region_path(region) %></td>
-        <td><%= link_to 'Destroy', region, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to 'stations', region_stations_path(region) %>
+          <%= link_to 'Show', region %></td>
       </tr>
     <% end %>
   </tbody>

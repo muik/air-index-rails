@@ -20,5 +20,7 @@
   <%= @region.station_code %>
 </p>
 
+<%= link_to 'Stations', region_stations_path(@region) %> |
+
 <%= link_to 'Edit', edit_region_path(@region) %> |
 <%= link_to 'Back', regions_path %>

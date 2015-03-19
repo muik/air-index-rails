@@ -1,9 +1,15 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :regions
+  resources :measures
 
-  resources :stations
+  resources :regions do
+    resources :stations
+  end
+
+  resources :stations do
+    resources :measures
+  end
 
   mount Sidekiq::Web => '/sidekiq'
   # The priority is based upon order of creation: first created -> highest priority.

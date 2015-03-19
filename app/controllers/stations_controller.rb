@@ -4,7 +4,9 @@ class StationsController < ApplicationController
   # GET /stations
   # GET /stations.json
   def index
-    @stations = Station.all
+    @stations = Station.all.order_by(:no.asc)
+    @region = Region.find params['region_id'] if params['region_id']
+    @stations = @stations.where(region: @region) if @region
   end
 
   # GET /stations/1
