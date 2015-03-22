@@ -20,14 +20,18 @@
   <tbody>
     <% @stations.each do |station| %>
       <tr>
-        <td><%= station.code %></td>
+        <td><%= link_to station.code, station %></td>
         <td><%= station.name %></td>
         <td><%= station.region.name %></td>
         <td><%= station.no %></td>
-        <td><%= station.address %></td>
+        <td><%= station.address %><br /><%= station.address_fixed %></td>
         <td>
+        <% if station.coordinates %>
+          <%= link_to('map', "http://map.daum.net?q=#{station.coordinates.reverse.join(',')}") if station.coordinates %>
+        <% else %>
+          no map
+        <% end %>
           <%= link_to 'measures', station_measures_path(station) %>
-          <%= link_to 'Show', station %></td>
       </tr>
     <% end %>
   </tbody>

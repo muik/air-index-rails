@@ -15,10 +15,10 @@
   <div class="header clearfix">
     <nav>
       <ul class="nav nav-pills pull-right">
-        <li role="presentation"></li>
+        <li role="presentation"><%= link_to 'Stations', stations_path %></li>
       </ul>
     </nav>
-    <h3 class="text-muted"></h3>
+    <h3 class="text-muted"><%= link_to 'Home', home_path %></h3>
   </div>
   <%= yield %>
 </div>

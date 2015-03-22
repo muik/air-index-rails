@@ -13,23 +13,23 @@
 
   <div class="field">
     <%= f.label :code %><br>
-    <%= f.text_field :code %>
+    <%= @station.code %>
   </div>
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= @station.name %>
   </div>
   <div class="field">
     <%= f.label :region %><br>
-    <%= f.text_field :region %>
-  </div>
-  <div class="field">
-    <%= f.label :no %><br>
-    <%= f.text_field :no %>
+    <%= @station.region.name %>
   </div>
   <div class="field">
     <%= f.label :address %><br>
-    <%= f.text_field :address %>
+    <%= @station.address %>
+  </div>
+  <div class="field">
+    <%= f.label :modified_address %><br>
+    <%= f.text_field :modified_address %>
   </div>
   <div class="actions">
     <%= f.submit %>

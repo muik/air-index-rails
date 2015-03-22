@@ -26,9 +26,23 @@
 </p>
 
 <p>
-  <strong>Measures:</strong>
-  <%= link_to 'measures', station_measures_path(@station) %>
+  <strong>Modified Address:</strong>
+  <%= @station.modified_address %>
 </p>
+
+<p>
+<% if @station.coordinates %>
+  <%= link_to('map', "http://map.daum.net?q=#{@station.coordinates.reverse.join(',')}") if @station.coordinates %>
+<% else %>
+  no map
+<% end %>
+</p>
+
+<p>
+<img src="http://www.airkorea.or.kr/images/station_map/<%= @station.code %>.gif" />
+</p>
+
+<%= link_to 'measures', station_measures_path(@station) %>
 
 <%= link_to 'Edit', edit_station_path(@station) %> |
 <%= link_to 'Back', stations_path %>
