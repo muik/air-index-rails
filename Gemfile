@@ -36,6 +36,7 @@ gem 'sinatra', :require => nil # for sidekiq web UI
 gem 'rerun' # for reload sidekiq
 gem 'kaminari'  # for pagination
 gem 'geocoder'
+gem 'whenever', :require => false # for schedule jobs
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

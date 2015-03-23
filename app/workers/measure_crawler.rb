@@ -2,6 +2,10 @@ class MeasureCrawler
   include Sidekiq::Worker
   sidekiq_options :retry => false
 
+  def self.perform_all
+    Station.all.each {|s| MeasureCrawler.perform_async(s.code)}
+  end
+
   def perform(station_code)
     station = Station.find station_code
     http = Net::HTTP
