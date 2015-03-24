@@ -1,2 +1,1 @@
-bundle exec rerun --background --dir app/workers --pattern '{**/*.rb}' -- bundle exec sidekiq -L log/sidekiq.log > log/sidekiq.log 2>log/sidekiq-error.log &
-
+bundle exec rerun --background --dir app/workers --pattern '{**/*.rb}' -- bundle exec sidekiq -L log/sidekiq.log -P tmp/pids/sidekiq.pid > log/sidekiq-console.log 2>log/sidekiq-error.log &
