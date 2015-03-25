@@ -1,6 +1,11 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  root 'home#index'
+  resources :home
+
+  resources :users
+
   resources :measures
 
   resources :regions do

@@ -22,9 +22,9 @@
       <tr>
         <td><%= link_to station.code, station %></td>
         <td><%= station.name %></td>
-        <td><%= station.region.name %></td>
+        <td><%= link_to station.region.name, station.region %></td>
         <td><%= station.no %></td>
-        <td><%= station.address %><br /><%= station.address_fixed %></td>
+        <td><%= station.address %><br /><%= station.address_for_geocode %></td>
         <td>
         <% if station.coordinates %>
           <%= link_to('map', "http://map.daum.net?q=#{station.coordinates.reverse.join(',')}") if station.coordinates %>

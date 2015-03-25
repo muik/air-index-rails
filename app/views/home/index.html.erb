@@ -1,0 +1,47 @@
+<p>
+grade: <span id="grade"></span>
+</p>
+<p>
+time: <span id="time"></span>
+</p>
+<p>
+station: <span id="station"></span>
+</p>
+
+<script>
+function getLocation() {
+  if (!navigator.geolocation) {
+    return false;
+  }
+  navigator.geolocation.getCurrentPosition(showPosition);
+}
+
+function showPosition(position) {
+  console.log(position);
+  var lat = position.coords.latitude;
+  var lng = position.coords.longitude;
+  //x.innerHTML = "Latitude: " + position.coords.latitude + 
+  //"<br>Longitude: " + position.coords.longitude; 
+  $.ajax('/?lat=' + lat + '&lng=' + lng).done(showMeasure);
+}
+
+function showMeasure(response) {
+  $('#grade').html(response['measure']['grade']);
+  $('#time').html(response['measure']['time']);
+  $('#station').html(response['station']['name']);
+  window.response = response;
+}
+
+var stationId = <%= @user.station_id or 'null' %>;
+<% if @data %>
+var response = <%= raw @data.to_json %>;
+<% else %>
+var response = null;
+<% end %>
+if (response != null) {
+  showMeasure(response);
+}
+
+getLocation();
+</script>
+
