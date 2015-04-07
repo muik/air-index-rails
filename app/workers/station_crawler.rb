@@ -17,12 +17,21 @@ class StationCrawler
     html = res.body
     html = html.force_encoding(Encoding::UTF_8)
     results = html.scan(/\)">([^<]+)<\/a><\/td>\s+\n.+vrmlSearch\('(\d+)', '(\d+)', '(\d+)'\)">([^<]+)/)
+
     for data in results
       region = Region.find data[2]
-      station = Station.new(code: data[1], name: data[0],
-                  no: data[3].to_i, address: data[4],
-                  region: region)
-      station.upsert
+      station = Station.find_or_initialize_by(code: data[1])
+      station.name = data[0]
+      station.no = data[3]
+      station.address = data[4]
+      station.region = region
+      station.save
+
+      unless station.geocoded?
+        station.geocode 
+        station.save
+      end
+
       MeasureCrawler.perform_async station.code
     end
   end

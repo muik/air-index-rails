@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: MyString
+  today_grade: MyString
+  today_table: MyString
+  today_analysis: MyString
+
+two:
+  date: MyString
+  today_grade: MyString
+  today_table: MyString
+  today_analysis: MyString

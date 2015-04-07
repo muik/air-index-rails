@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @forecast.date %>
+</p>
+
+<p>
+  <strong>Today grade:</strong>
+  <%= @forecast.today_grade %>
+</p>
+
+<p>
+  <strong>Today table:</strong>
+  <%= @forecast.today_table %>
+</p>
+
+<p>
+  <strong>Today analysis:</strong>
+  <%= @forecast.today_analysis %>
+</p>
+
+<%= link_to 'Edit', edit_forecast_path(@forecast) %> |
+<%= link_to 'Back', forecasts_path %>

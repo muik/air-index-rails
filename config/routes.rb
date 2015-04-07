@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :forecasts
   root 'home#index'
   resources :home
 

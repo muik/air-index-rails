@@ -2,7 +2,6 @@ class Station
   include Mongoid::Document
   include Mongoid::Timestamps
   include Geocoder::Model::Mongoid
-  field :_id, type: String, default: ->{ code }
   field :code, type: String
   field :name, type: String
   field :no, type: Integer     # 지역내 순서
@@ -17,8 +16,9 @@ class Station
   reverse_geocoded_by :coordinates, address: :reserved_address
   after_validation :geocode, :reverse_geocode
 
-  index({ region_id: 1, no: 1 }, { background: true})
+  index({ region_id: 1, no: 1 }, { background: true })
   index({ coordinates: '2d' }, { min: -200, max: 200, background: true })
+  index({ code: 1 }, { unique: true })
 
   def address_for_geocode
     modified_address or address_fixed

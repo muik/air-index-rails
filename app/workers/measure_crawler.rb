@@ -15,11 +15,13 @@ class MeasureCrawler
     obj = JSON.parse json
     charts = obj['charts']
     for data in charts
-      Measure.new(station: station,
-                  time: Time.strptime(data['DATA_TIME'], '%m-%d:%H'),
-                  grade: data['KHAI_GRADE'],
-                  index: data['KHAI_VALUE'],
-                  major: data['KHAI_ITEM_CODE']).upsert
+      m = Measure.find_or_initialize_by(
+        station: station,
+        time: Time.strptime(data['DATA_TIME'], '%m-%d:%H'))
+      m.grade = data['KHAI_GRADE']
+      m.index = data['KHAI_VALUE']
+      m.major = data['KHAI_ITEM_CODE']
+      m.save
     end
   end
 end

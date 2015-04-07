@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Forecasts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Today grade</th>
+      <th>Today table</th>
+      <th>Today analysis</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @forecasts.each do |forecast| %>
+      <tr>
+        <td><%= forecast.date %></td>
+        <td><%= forecast.today_grade %></td>
+        <td><%= forecast.today_table %></td>
+        <td><%= forecast.today_analysis %></td>
+        <td><%= link_to 'Show', forecast %></td>
+        <td><%= link_to 'Edit', edit_forecast_path(forecast) %></td>
+        <td><%= link_to 'Destroy', forecast, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Forecast', new_forecast_path %>
