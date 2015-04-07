@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AirIndex</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <%= yield :head_end if content_for? :head_end %>
+</head>
+<body>
+
+<div class="container col-md-8 col-md-offset-2">
+  <div class="header clearfix">
+    <nav>
+      <ul class="nav nav-pills pull-right">
+        <li role="presentation"><%= link_to 'Stations', stations_path %></li>
+      </ul>
+    </nav>
+    <h3 class="text-muted"><%= link_to 'Home', '/' %></h3>
+  </div>
+  <%= yield %>
+</div>
+
+<%= yield :body_end if content_for? :body_end %>
+
+</body>
+</html>

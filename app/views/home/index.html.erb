@@ -1,11 +1,19 @@
+<% content_for :head_end do %>
+<style>
+    #station {font-size:1.5em}
+    #grade {font-size:3em; line-height:1.2em}
+    #grade-label {margin-top:1.5em}
+</style>
+<% end %>
+
 <p>
-grade: <span id="grade"></span>
+    <div id="time"></div>
+    <span id="station"></span>
+    <span id="station-label">측정소</span>
 </p>
 <p>
-time: <span id="time"></span>
-</p>
-<p>
-station: <span id="station"></span>
+    <div id="grade-label">통합대기지수</div>
+    <div id="grade"></div>
 </p>
 
 <script>
@@ -25,8 +33,17 @@ function showPosition(position) {
   $.ajax('/?lat=' + lat + '&lng=' + lng).done(showMeasure);
 }
 
+var gradeTexts = ['좋음', '보통', '나쁨', '매우나쁨', '데이터없음'];
+
+function getGradeText(gradeCode) {
+    if (gradeCode < 1 || gradeCode > gradeTexts.length) {
+        return '알수없음';
+    }
+    return gradeTexts[gradeCode - 1];
+}
+
 function showMeasure(response) {
-  $('#grade').html(response['measure']['grade']);
+  $('#grade').html(getGradeText(response['measure']['grade']));
   $('#time').html(response['measure']['time']);
   $('#station').html(response['station']['name']);
   window.response = response;
