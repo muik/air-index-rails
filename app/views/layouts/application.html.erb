@@ -9,9 +9,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <%= yield :head_end if content_for? :head_end %>
 </head>
-<body>
+<body class="<%= params[:controller] %> <%= params[:action] %>">
 
-<div class="container col-md-8 col-md-offset-2">
+<div class="container col-md-4 col-md-offset-4">
+  <!--
   <div class="header clearfix">
     <nav>
       <ul class="nav nav-pills pull-right">
@@ -20,6 +21,7 @@
     </nav>
     <h3 class="text-muted"><%= link_to 'Home', '/' %></h3>
   </div>
+  -->
   <%= yield %>
 </div>
 

@@ -64,11 +64,16 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      if params[:id] == 'me'
+        @user = User.find cookies[:uuid]
+        #params[:id] = @user.id.to_s
+      else
+        @user = User.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:station)
+      params.require(:user).permit(:station_id)
     end
 end

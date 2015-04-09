@@ -10,7 +10,8 @@ class HomeController < ApplicationController
       lat = params[:lat].to_f
       lng = params[:lng].to_f
       s = Station.geo_near([lng, lat]).first
-      unless @user.station_id == s.id
+      #unless @user.station_id == s.id
+      unless @user.station_id
         @user.station_id = s.id
         @user.save
       end
@@ -27,8 +28,34 @@ class HomeController < ApplicationController
 
   private
   def get_response(s, m)
+    measure_day = get_day_text(m.time)
+    f = Forecast.order_by(date: -1).first
+    forecast_day = get_day_text(f.date)
+
+    {
+      station: {
+        name: s.name,
+        id: s.id,
+      },
+      measure: {
+        grade: m.grade,
+        time: m.time.localtime.strftime("#{measure_day} %-H시"),
+      },
+      forecasts: {
+        time: f.date.localtime.strftime("#{forecast_day} %-H시"),
+        today: {
+          grade: f.today_grade
+        },
+        tomorrow: {
+          grade: f.tomorrow_grade || '17시에 발표'
+        }
+      }
+    }
+  end
+
+  def get_day_text(time)
     past_days = (Time.now.localtime.strftime('%Y%m%d').to_time -
-                 m.time.localtime.strftime('%Y%m%d').to_time) / 1.day
+                 time.localtime.strftime('%Y%m%d').to_time) / 1.day
     if past_days == 0
       day = '오늘'
     elsif past_days == 1
@@ -36,14 +63,6 @@ class HomeController < ApplicationController
     else
       day = "#{past_days}일 전"
     end
-    {
-      station: {
-        name: s.name
-      },
-      measure: {
-        grade: m.grade,
-        time: m.time.localtime.strftime("#{day} %-H시")
-      }
-    }
+    day
   end
 end

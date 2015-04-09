@@ -1,3 +1,94 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$medium-font-size: 24px;
+$large-font-size: 48px;
+$so-bad-color: #F44336;
+$bad-color: #FF9800;
+$good-color: #2196F3;
+$not-bad-color: #4CAF50;
+$edge: 16px;
+$action-bar-height: 56px;
+$line-height: 48px;
+
+body.home.index {
+  font-size: 16px;
+  line-height: 24px;
+
+  #grade {
+    font-size: $large-font-size;
+    line-height: 56px;
+    padding: 0.5em 48px;
+    background-repeat: no-repeat;
+    background-position: $edge center;
+    text-indent: $edge+10px;
+    color: white;
+  }
+  h3.station {
+    line-height: $line-height;
+    margin: 0;
+    padding: 0 $edge;
+    font-size: $medium-font-size;
+    background: #EEEEEE;
+  }
+  #svg {
+    fill: red;
+    color: red;
+  }
+  #grade[value=""], #grade[value="0"] {
+    background-image: url('http://google.github.io/material-design-icons/action/svg/ic_help_48px.svg');
+  }
+  #grade[value="1"] {
+    background-color: $good-color;
+    background-image: url('http://google.github.io/material-design-icons/image/svg/ic_tag_faces_48px.svg');
+  }
+  #grade[value="2"] {
+    background-color: $not-bad-color;
+    background-image: url('/images/ic_tag_faces_48px.svg');
+  }
+  #grade[value="3"] {
+    background-color: $bad-color;
+    background-image: url('http://google.github.io/material-design-icons/content/svg/ic_report_48px.svg');
+  }
+  #grade[value="4"] {
+    background-color: $so-bad-color;
+    background-image: url('http://google.github.io/material-design-icons/alert/svg/ic_warning_48px.svg');
+  }
+  #near_station_confirm {background:yellow; line-height: 3em; display:none; padding-left:1em; position:absolute; top:0; width:100%}
+  .close-text {float:right; padding:0 1em}
+  #action_bar {
+    padding: 0; margin:0;
+    height: $action-bar-height;
+    color: white;
+    background: #1B5E20;
+  }
+  #action_bar .buttons {
+    height: 100%;
+    display: inline-block;
+    float:right;line-height:$action-bar-height; padding:0}
+  #action_bar .buttons button {
+    background: transparent;
+    border: 0;
+    padding: 0 $edge;
+    height: 100%;
+    margin: 0;
+  }
+  #action_bar h1 {
+    font-size: $medium-font-size;
+    line-height: $action-bar-height;
+    height:100%;
+    margin:0;
+    padding: 0 $edge;
+  }
+  #grade-label {
+    padding: 8px $edge;
+    color: white;
+    background: #388E3C;
+  }
+
+  #forecasts {
+    border-top: 1px solid #E0E0E0;
+    padding: $edge;
+    p { margin:0 0 $edge 0; }
+  }
+}
