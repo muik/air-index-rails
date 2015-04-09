@@ -1,4 +1,7 @@
-<div id="near_station_confirm"><span class="close-text">X</span>가까운 측정소 보기 - <span id="near_station_name"></span></div>
+<div id="near_station_confirm">
+  가까운 측정소 보기 - <span id="near_station_name"></span>
+  <button class="close-text">X</button>
+</div>
 <div id="action_bar">
     <div class="buttons">
         <button id="refresh">새로고침</button>
@@ -7,108 +10,41 @@
     <div style="clear: both;"></div>
 </div>
 
-<div>
-    <div id="grade-label">통합대기지수</div>
-    <div id="grade"></div>
-</div>
-<h3 class="station"><span id="station"></span> 측정소 / <span id="time"></span></h3>
-
-<div id="forecasts">
-  <div>
-      <label>오늘 예보</label>
-      <p id="today_grade"></p>
-  </div>
-  <div>
-      <label>내일 예보</label>
-      <p id="tomorrow_grade"></p>
-  </div>
+<div id="loading_page" class="page">
+  <div class="message">현위치 확인 중..</div>
 </div>
 
-<% content_for :body_end do %>
+<div id="location_allow_page" class="page">
+  <h3>현위치 허용 필요</h3>
+  <button>현위치 확인하기</button>
+</div>
+
+<div id="content_page" class="page">
+  <div>
+      <div id="grade-label">통합대기지수</div>
+      <div id="grade"></div>
+  </div>
+  <h3 class="station"><span id="station"></span> 측정소 / <span id="time"></span></h3>
+
+  <div id="forecasts">
+    <div>
+        <label>오늘 예보</label>
+        <p id="today_grade"></p>
+    </div>
+    <div>
+        <label>내일 예보</label>
+        <p id="tomorrow_grade"></p>
+    </div>
+  </div>
+</div>
+
+<% content_for :head_end do %>
 <script>
-
-function getLocation() {
-  if (!navigator.geolocation) {
-    return false;
-  }
-  navigator.geolocation.getCurrentPosition(showPosition);
-}
-
-function showPosition(position) {
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-    $.ajax('/?lat=' + lat + '&lng=' + lng).done(showMeasure);
-}
-
-var gradeTexts = ['좋음', '보통', '나쁨', '매우나쁨', '데이터없음'];
-
-function getGradeText(gradeCode) {
-    if (gradeCode < 1 || gradeCode > gradeTexts.length) {
-        return '알수없음';
-    }
-    return gradeTexts[gradeCode - 1];
-}
-
-function showMeasure(response, force) {
-    if (force != true && window.response && window.response['station']['id'] != response['station']['id']) {
-        return showNearStationConfirm(response);
-    }
-
-    var grade = response['measure']['grade'];
-  $('#grade').attr('value', grade);
-  $('#grade').html(getGradeText(grade));
-  $('#time').html(response['measure']['time']);
-  $('#station').html(response['station']['name']);
-  $('#today_grade').html(response['forecasts']['today']['grade']);
-  $('#tomorrow_grade').html(response['forecasts']['tomorrow']['grade']);
-  window.response = response;
-}
-
-function showNearStationConfirm(response) {
-    $('#near_station_name').html(response['station']['name']);
-    var nearStationConfirm = $('#near_station_confirm');
-    nearStationConfirm.slideDown();
-    $('.close-text', nearStationConfirm).click(function() {
-        $('#near_station_confirm').fadeOut();
-        return false;
-    });
-    nearStationConfirm.click(function() {
-        showMeasure(response, true);
-        $('#near_station_confirm').slideUp();
-
-        $.ajax({
-            type: 'PATCH',
-            url: '/users/me.json',
-            data: {
-                user: {
-                    station_id: response['station']['id']
-                }
-            },
-            success: function() {
-                console.log(arguments);
-                console.log('success');
-                return false;
-            },
-            error: function() {
-                console.log(arguments);
-                console.log('error');
-                return false;
-            }
-        });
-        return false;
-    });
-}
-
 var stationId = <%= @user.station_id or 'null' %>;
 <% if @data %>
 var response = <%= raw @data.to_json %>;
 <% else %>
 var response = null;
 <% end %>
-if (response != null) {
-  showMeasure(response);
-}
-
-getLocation();
 </script>
 <% end %>

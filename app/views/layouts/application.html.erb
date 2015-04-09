@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
   <title>AirIndex</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -11,7 +12,7 @@
 </head>
 <body class="<%= params[:controller] %> <%= params[:action] %>">
 
-<div class="container col-md-4 col-md-offset-4">
+<div class="container col-md-4 col-md-offset-4" style="padding:0">
   <!--
   <div class="header clearfix">
     <nav>

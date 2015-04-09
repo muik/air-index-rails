@@ -15,80 +15,158 @@ body.home.index {
   font-size: 16px;
   line-height: 24px;
 
-  #grade {
-    font-size: $large-font-size;
-    line-height: 56px;
-    padding: 0.5em 48px;
-    background-repeat: no-repeat;
-    background-position: $edge center;
-    text-indent: $edge+10px;
-    color: white;
-  }
-  h3.station {
-    line-height: $line-height;
-    margin: 0;
-    padding: 0 $edge;
-    font-size: $medium-font-size;
-    background: #EEEEEE;
-  }
-  #svg {
-    fill: red;
-    color: red;
-  }
-  #grade[value=""], #grade[value="0"] {
-    background-image: url('http://google.github.io/material-design-icons/action/svg/ic_help_48px.svg');
-  }
-  #grade[value="1"] {
-    background-color: $good-color;
-    background-image: url('http://google.github.io/material-design-icons/image/svg/ic_tag_faces_48px.svg');
-  }
-  #grade[value="2"] {
-    background-color: $not-bad-color;
-    background-image: url('/images/ic_tag_faces_48px.svg');
-  }
-  #grade[value="3"] {
-    background-color: $bad-color;
-    background-image: url('http://google.github.io/material-design-icons/content/svg/ic_report_48px.svg');
-  }
-  #grade[value="4"] {
-    background-color: $so-bad-color;
-    background-image: url('http://google.github.io/material-design-icons/alert/svg/ic_warning_48px.svg');
-  }
-  #near_station_confirm {background:yellow; line-height: 3em; display:none; padding-left:1em; position:absolute; top:0; width:100%}
-  .close-text {float:right; padding:0 1em}
   #action_bar {
     padding: 0; margin:0;
     height: $action-bar-height;
     color: white;
     background: #1B5E20;
+    .buttons {
+      height: 100%;
+      display: inline-block;
+      float:right;line-height:$action-bar-height; padding:0;
+      button {
+        background: transparent;
+        border: 0;
+        padding: 0 $edge;
+        height: 100%;
+        margin: 0;
+      }
+    }
+
+    h1 {
+      font-size: $medium-font-size;
+      line-height: $action-bar-height;
+      height:100%;
+      margin:0;
+      padding: 0 $edge;
+      font-weight: normal;
+    }
   }
-  #action_bar .buttons {
-    height: 100%;
-    display: inline-block;
-    float:right;line-height:$action-bar-height; padding:0}
-  #action_bar .buttons button {
-    background: transparent;
-    border: 0;
-    padding: 0 $edge;
-    height: 100%;
-    margin: 0;
-  }
-  #action_bar h1 {
-    font-size: $medium-font-size;
-    line-height: $action-bar-height;
-    height:100%;
-    margin:0;
-    padding: 0 $edge;
-  }
+
   #grade-label {
     padding: 8px $edge;
     color: white;
-    background: #388E3C;
+  }
+
+  #grade {
+    font-size: $large-font-size;
+    line-height: 56px;
+    padding: 24px 48px;
+    background-repeat: no-repeat;
+    background-position: $edge center;
+    text-indent: $edge+10px;
+    color: white;
+  }
+  h3 {
+    line-height: 56px;
+    margin: 0;
+    padding: 0 $edge;
+    font-size: $medium-font-size;
+    background: #EEEEEE;
+  }
+  #near_station_confirm {
+    background: yellow;
+    line-height: 40px;
+    display: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-indent: $edge;
+    .close-text {
+      position: absolute;
+      right: 0;
+      padding: 0 $edge;
+      border: 0;
+      background: transparent;
+    }
   }
 
   #forecasts {
     border-top: 1px solid #E0E0E0;
     padding: $edge;
-    p { margin:0 0 $edge 0; }
+    font-size: 16px;
+    p {
+      margin:0 0 $edge 0;
+      font-size: 16px;
+    }
+  }
+
+  div.page {
+    display: none;
+  }
+  #loading_page {
+    .message {
+      font-size: $medium-font-size;
+      text-align: center;
+      margin: 64px 0;
+    }
+  }
+  #location_allow_page {
+    text-align: center;
+    button {
+      font-size: 32px;
+      margin: 64px auto;
+    }
+  }
+}
+
+body.home.index {
+  #action_bar {
+    background: #212121;
+  }
+  #grade-label {
+    background: #616161;
+  }
+  #grade {
+    background-color: #9E9E9E;
+    background-image: url('/images/ic_help_48px.svg');
+  }
+}
+body.home.index[grade="1"] {
+  #action_bar {
+    background: #0D47A1;
+  }
+  #grade-label {
+    background: #1976D2;
+  }
+  #grade {
+    background-color: $good-color;
+    background-image: url('/images/ic_tag_faces_48px.svg');
+  }
+}
+body.home.index[grade="2"] {
+  #action_bar {
+    background: #1B5E20;
+  }
+  #grade-label {
+    background: #388E3C;
+  }
+  #grade {
+    background-color: $not-bad-color;
+    background-image: url('/images/ic_tag_faces_48px.svg');
+  }
+}
+body.home.index[grade="3"] {
+  #action_bar {
+    background: #E65100;
+  }
+  #grade-label {
+    background: #F57C00;
+  }
+  #grade {
+    background-color: $bad-color;
+    background-image: url('/images/ic_report_48px.svg');
+  }
+}
+body.home.index[grade="4"] {
+  #action_bar {
+    background: #B71C1C;
+  }
+  #grade-label {
+    background: #D32F2F;
+  }
+  #grade {
+    background-color: $so-bad-color;
+    background-image: url('/images/ic_warning_48px.svg');
   }
 }
