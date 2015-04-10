@@ -1,14 +1,16 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, Rails.application.class.parent_name
-set :repo_url, 'git@github.com:muik/air-index-rails.git'
+set :application, 'air-index-rails'
+set :repo_url, 'https://github.com/muik/air-index-rails'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, '/var/www/my_app_name'
+set :deploy_to, '/home/muik/deploy/air-index'
+set :rvm_ruby_version, '2.2.1'
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default value for :scm is :git
 # set :scm, :git
