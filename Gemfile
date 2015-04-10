@@ -28,12 +28,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'unicorn'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'capistrano-rails', group: :development
 
 gem 'mongoid', '~> 4.0.0'
 gem 'sidekiq'
 gem 'sinatra', :require => nil # for sidekiq web UI
-gem 'rerun' # for reload sidekiq
 gem 'kaminari'  # for pagination
 gem 'geocoder'
 gem 'whenever', :require => false # for schedule jobs
@@ -48,6 +47,7 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
-  gem 'awesome_print'
+  gem 'awesome_print'   # pretty print
+  gem 'rerun' # for reload sidekiq
 end
 
