@@ -19,7 +19,7 @@ class StationCrawler
     results = html.scan(/\)">([^<]+)<\/a><\/td>\s+\n.+vrmlSearch\('(\d+)', '(\d+)', '(\d+)'\)">([^<]+)/)
 
     for data in results
-      region = Region.find data[2]
+      region = Region.find_by(code: data[2])
       station = Station.find_or_initialize_by(code: data[1])
       station.name = data[0]
       station.no = data[3]

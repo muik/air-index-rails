@@ -7,7 +7,7 @@ class MeasureCrawler
   end
 
   def perform(station_code)
-    station = Station.find station_code
+    station = Station.find_by(code: station_code)
     http = Net::HTTP
     url = "http://www.airkorea.or.kr/web/pollution/getRealChart?dateDiv=1&period=1&stationCode=#{station.code}"
     uri = URI(url)
