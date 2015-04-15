@@ -40,7 +40,11 @@
 
 <% content_for :head_end do %>
 <script>
-var stationId = <%= @user.station_id or 'null' %>;
+<% if @user.station_id %>
+var stationId = '<%= @user.station_id %>';
+<% else %>
+var stationId = null;
+<% end %>
 <% if @data %>
 var response = <%= raw @data.to_json %>;
 <% else %>
