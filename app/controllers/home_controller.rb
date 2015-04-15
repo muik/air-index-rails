@@ -35,7 +35,7 @@ class HomeController < ApplicationController
     {
       station: {
         name: s.name,
-        id: s.id,
+        id: s.id.to_s,
       },
       measure: {
         grade: m.grade,

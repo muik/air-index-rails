@@ -57,13 +57,9 @@ $ ->
           }
         },
         success: () ->
-          console.log(arguments)
-          console.log('success')
           return false;
         ,
         error: () ->
-          console.log(arguments)
-          console.log('error')
           return false
       });
       return false;
