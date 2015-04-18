@@ -10,7 +10,7 @@ class ForecastCrawler
     m = html.match('(\d{4}-\d{2}-\d{2} \d{2}) 시')
     date = m[1].to_time
 
-    m = m.post_match.match('미세먼지 내일예보')
+    m = m.post_match.match('미세먼지 및 오존 내일예보')
 
     today = get_forecast_data(m.pre_match)
     tomorrow = get_forecast_data(m.post_match)
