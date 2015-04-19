@@ -10,4 +10,12 @@ class Forecast
   field :tomorrow_analysis, type: String
 
   index({ date: -1 }, { unique: true, background: true })
+
+  def today_grade_of(province)
+    today_table[province]
+  end
+
+  def tomorrow_grade_of(province)
+    tomorrow_table && tomorrow_table[province] || nil
+  end
 end

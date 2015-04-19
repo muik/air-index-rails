@@ -28,12 +28,19 @@ $ ->
     showPage('#content_page')
 
     grade = response['measure']['grade']
+    forecasts = response['forecasts']
+    console.log forecasts['today']['province_grade']
+    today_province_grade = '- ' + response['station']['province'] + ': ' + forecasts['today']['province_grade'].dust
+    if forecasts['tomorrow']['province_grade']
+      tomorrow_province_grade = '- ' + response['station']['province'] + ': ' + forecasts['tomorrow']['province_grade'].dust
     $('body').attr('grade', grade)
     $('#grade').html(getGradeText(grade))
     $('#time').html(response['measure']['time'])
     $('#station').html(response['station']['name'])
-    $('#today_grade').html(response['forecasts']['today']['grade'])
-    $('#tomorrow_grade').html(response['forecasts']['tomorrow']['grade'].replace(/\n/, '<br />'))
+    $('#today_grade').html(forecasts['today']['grade'])
+    $('#tomorrow_grade').html(forecasts['tomorrow']['grade'].replace(/\n/, '<br />'))
+    $('#today_province_grade').html(today_province_grade)
+    $('#tomorrow_province_grade').html(tomorrow_province_grade)
     window.response = response
 
   showNearStationConfirm = (response) ->

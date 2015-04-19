@@ -25,6 +25,7 @@ class StationCrawler
       station.no = data[3]
       station.address = data[4]
       station.region = region
+      station.set_province unless station.province
       station.save
 
       unless station.geocoded?

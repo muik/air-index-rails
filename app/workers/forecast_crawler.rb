@@ -35,7 +35,7 @@ class ForecastCrawler
     grade = m[1]
     m = m.post_match.match('미세먼지</th>\s+')
     m = m.post_match.match('</tr>')
-    results = m.pre_match.scan(/">([^<]+)</)
+    results = m.pre_match.scan(/[h"]>([^<]+)</)
     dust_array = results.flatten
     m = m.post_match.match('PM<sub>10</sub>')
     m = m.post_match.match('</tr>')
@@ -46,7 +46,7 @@ class ForecastCrawler
     results = m.pre_match.scan(/>([^<]+)<\//)
     pm25_array = results.flatten
 
-    states = %w(서울  인천  경기북부  경기남부  영서  영동 충청권  호남권  영남권  제주권)
+    states = %w(서울  인천  경기북부  경기남부  영서  영동 충청권  호남권  영남권  제주)
     table = {}
     states.each_with_index do |state, i|
       table[state] = {
@@ -55,6 +55,17 @@ class ForecastCrawler
         pm25: pm25_array[i],
       }
     end
+
+    %w(대전 충북 충남).each do |region|
+      table[region] = table['충청권']
+    end
+    %w(광주 전북 전남).each do |region|
+      table[region] = table['호남권']
+    end
+    %w(부산 대구 울산 경북 경남).each do |region|
+      table[region] = table['영남권']
+    end
+    %w(충청권 호남권 영남권).each { |k| table.delete k.to_sym }
 
     m.post_match.match('cols="104">([^<]+)</textarea')
     analysis = m[1]

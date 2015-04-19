@@ -36,6 +36,7 @@ class HomeController < ApplicationController
       station: {
         name: s.name,
         id: s.id.to_s,
+        province: s.province,
       },
       measure: {
         grade: m.grade,
@@ -44,10 +45,12 @@ class HomeController < ApplicationController
       forecasts: {
         time: f.date.localtime.strftime("#{forecast_day} %-H시"),
         today: {
-          grade: f.today_grade
+          grade: f.today_grade,
+          province_grade: f.today_grade_of(s.province),
         },
         tomorrow: {
-          grade: f.tomorrow_grade || '17시에 발표'
+          grade: f.tomorrow_grade || '17시에 발표',
+          province_grade: f.tomorrow_grade_of(s.province),
         }
       }
     }
