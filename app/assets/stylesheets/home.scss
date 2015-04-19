@@ -23,6 +23,7 @@ body.home.index {
     .buttons {
       height: 100%;
       display: inline-block;
+      display: none; // 임시로 가림
       float:right;line-height:$action-bar-height; padding:0;
       button {
         background: transparent;
