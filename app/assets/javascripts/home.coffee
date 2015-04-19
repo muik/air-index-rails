@@ -33,7 +33,7 @@ $ ->
     $('#time').html(response['measure']['time'])
     $('#station').html(response['station']['name'])
     $('#today_grade').html(response['forecasts']['today']['grade'])
-    $('#tomorrow_grade').html(response['forecasts']['tomorrow']['grade'])
+    $('#tomorrow_grade').html(response['forecasts']['tomorrow']['grade'].replace(/\n/, '<br />'))
     window.response = response
 
   showNearStationConfirm = (response) ->
