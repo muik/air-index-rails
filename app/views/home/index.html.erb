@@ -26,13 +26,24 @@
   </div>
   <h3 class="station"><span id="station"></span> 측정소 / <span id="time"></span></h3>
 
+  <div id="day_forecasts">
+      <h4>'<span id="province"></span>' 예보 <span id="forecast_time"/></h4>
+      <div class="day today" grade="">
+          <label>오늘</label>
+          <div class="grade"></div>
+      </div>
+      <div class="day tomorrow" grade="">
+          <label>내일</label>
+          <div class="grade"></div>
+      </div>
+  </div>
   <div id="forecasts">
     <div>
-        <label>오늘 예보 <span id="today_province_grade"></span></label>
+        <label>오늘 예보</label>
         <p id="today_grade"></p>
     </div>
     <div>
-        <label>내일 예보 <span id="tomorrow_province_grade"></span></label>
+        <label>내일 예보</label>
         <p id="tomorrow_grade"></p>
     </div>
   </div>

@@ -29,18 +29,32 @@ $ ->
 
     grade = response['measure']['grade']
     forecasts = response['forecasts']
-    console.log forecasts['today']['province_grade']
-    today_province_grade = '- ' + response['station']['province'] + ': ' + forecasts['today']['province_grade'].dust
-    if forecasts['tomorrow']['province_grade']
-      tomorrow_province_grade = '- ' + response['station']['province'] + ': ' + forecasts['tomorrow']['province_grade'].dust
     $('body').attr('grade', grade)
     $('#grade').html(getGradeText(grade))
     $('#time').html(response['measure']['time'])
+    $('#forecast_time').html('('+forecasts['time']+' 발표)')
     $('#station').html(response['station']['name'])
     $('#today_grade').html(forecasts['today']['grade'])
     $('#tomorrow_grade').html(forecasts['tomorrow']['grade'].replace(/\n/, '<br />'))
-    $('#today_province_grade').html(today_province_grade)
-    $('#tomorrow_province_grade').html(tomorrow_province_grade)
+
+    dayForecasts = $('#day_forecasts')
+    $('#province', dayForecasts).html(response['station']['province'])
+    gradeText = forecasts['today']['province_grade'].dust
+    gradeIndex = gradeTexts.indexOf(gradeText) + 1
+    dayForecast = $('.day.today', dayForecasts)
+    dayForecast.attr('grade', gradeIndex)
+    $('.grade', dayForecast).html(gradeText)
+
+    if forecasts['tomorrow']['province_grade']
+      gradeText = forecasts['tomorrow']['province_grade'].dust
+      gradeIndex = gradeTexts.indexOf(gradeText) + 1
+    else
+      gradeText = '(17시에 발표)'
+      gradeIndex = ''
+    dayForecast = $('.day.tomorrow', dayForecasts)
+    dayForecast.attr('grade', gradeIndex)
+    $('.grade', dayForecast).html(gradeText)
+
     window.response = response
 
   showNearStationConfirm = (response) ->

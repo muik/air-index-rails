@@ -92,6 +92,57 @@ body.home.index {
       line-height: 24px;
     }
   }
+  div#day_forecasts {
+    display: inline-block;
+    width: 100%;
+    border-top: 1px solid #E0E0E0;
+    h4 {
+      padding: 0 $edge;
+      margin: 24px 0 0 0;
+      font-size: 16px;
+      line-height: 40px;
+      background: #EEEEEE;
+      #forecast_time {
+        font-weight: normal;
+        color: #9E9E9E;
+        font-size: 16px;
+      }
+    }
+    >div.day {
+      color: white;
+      float: left;
+      width: 50%;
+      padding: 8px $edge;
+      font-size: 16px;
+      line-height: 16px;
+      label {
+        text-indent: 40px;
+      }
+      background-repeat: no-repeat;
+      background-position: $edge center;
+      background-color: #9E9E9E;
+      background-image: url('/images/ic_help_24px.svg');
+      .grade {
+        text-indent: 40px;
+      }
+    }
+    >div.day[grade="1"] {
+      background-color: $good-color;
+      background-image: url('/images/ic_tag_faces_24px.svg');
+    }
+    >div.day[grade="2"] {
+      background-color: $not-bad-color;
+      background-image: url('/images/ic_tag_faces_24px.svg');
+    }
+    >div.day[grade="3"] {
+      background-color: $bad-color;
+      background-image: url('/images/ic_report_24px.svg');
+    }
+    >div.day[grade="4"] {
+      background-color: $so-bad-color;
+      background-image: url('/images/ic_warning_24px.svg');
+    }
+  }
 
   div.page {
     display: none;
