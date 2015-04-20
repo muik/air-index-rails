@@ -29,7 +29,7 @@ class ForecastCrawler
 
   private
   def get_forecast_data(html)
-    m = html.match('inform_overall"[^>]+>([^<]+)')
+    m = html.match('inform_overall" [^>]+>([^<]+)')
     return unless m
     
     grade = m[1]
