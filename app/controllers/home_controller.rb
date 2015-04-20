@@ -43,7 +43,7 @@ class HomeController < ApplicationController
         time: m.time.localtime.strftime("#{measure_day} %-H시"),
       },
       forecasts: {
-        time: f.date.localtime.strftime("#{forecast_day} %-H시"),
+        time: f.date.localtime.strftime("#{forecast_day} %H시"),
         today: {
           grade: f.today_grade,
           province_grade: f.today_grade_of(s.province),
