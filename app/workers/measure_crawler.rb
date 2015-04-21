@@ -8,19 +8,15 @@ class MeasureCrawler
 
   def perform(station_code)
     station = Station.find_by(code: station_code)
-    http = Net::HTTP
-    url = "http://www.airkorea.or.kr/web/pollution/getRealChart?dateDiv=1&period=1&stationCode=#{station.code}"
-    uri = URI(url)
-    json = http.get(uri)
-    obj = JSON.parse json
-    charts = obj['charts']
-    for data in charts
+    measures = AirKorea.client.measures(station_code)
+
+    for data in measures
       m = Measure.find_or_initialize_by(
         station: station,
-        time: Time.strptime(data['DATA_TIME'], '%m-%d:%H'))
-      m.grade = data['KHAI_GRADE']
-      m.index = data['KHAI_VALUE']
-      m.major = data['KHAI_ITEM_CODE']
+        time: data[:time])
+      m.grade = data[:grade]
+      m.index = data[:index]
+      m.major = data[:major]
       m.save
     end
   end

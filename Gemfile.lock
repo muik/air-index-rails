@@ -1,3 +1,9 @@
+PATH
+  remote: air_korea
+  specs:
+    air_korea (0.0.1)
+      rails (~> 4.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -228,6 +234,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  air_korea!
   awesome_print
   byebug
   capistrano-rails
