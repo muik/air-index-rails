@@ -1,5 +1,6 @@
-PATH
-  remote: air_korea
+GIT
+  remote: git@github.com:muik/air-korea.git
+  revision: ff3b4f38d5c82ccbe44973ad5228eb0c6973abb6
   specs:
     air_korea (0.0.1)
       rails (~> 4.2.1)

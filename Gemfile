@@ -40,7 +40,7 @@ gem 'sinatra', :require => nil # for sidekiq web UI
 gem 'kaminari'  # for pagination
 gem 'geocoder'
 gem 'whenever', :require => false # for schedule jobs
-gem 'air_korea', path: 'air_korea'
+gem 'air_korea', git: 'git@github.com:muik/air-korea.git'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
