@@ -1,25 +1,20 @@
 class HomeController < ApplicationController
   def index
-    unless cookies[:uuid]
-      cookies[:uuid] = SecureRandom.uuid
-    end
-
-    @user = User.find_or_create_by(id: cookies[:uuid])
+    station_id = cookies[:station_id]
 
     if request.xhr?
       lat = params[:lat].to_f
       lng = params[:lng].to_f
-      s = Station.geo_near([lng, lat]).first
-      #unless @user.station_id == s.id
-      unless @user.station_id
-        @user.station_id = s.id
-        @user.save
+      station = Station.geo_near([lng, lat]).first
+      unless station_id
+        station_id = station.id.to_s
+        cookies[:station_id] = station_id
       end
-      m = s.get_last_measure
-      render json: get_response(s, m)
+      measure = station.get_last_measure
+      render json: get_response(station, measure)
     else
-      if @user.station_id
-        @station = @user.station 
+      if station_id
+        @station = Station.find station_id
         @measure = @station.get_last_measure
         @data = get_response(@station, @measure)
       end
@@ -27,30 +22,30 @@ class HomeController < ApplicationController
   end
 
   private
-  def get_response(s, m)
-    measure_day = get_day_text(m.time)
+  def get_response(station, measure)
+    measure_day = get_day_text(measure.time)
     f = Forecast.order_by(date: -1).first
     forecast_day = get_day_text(f.date)
 
     {
       station: {
-        name: s.name,
-        id: s.id.to_s,
-        province: s.province,
+        name: station.name,
+        id: station.id.to_s,
+        province: station.province,
       },
       measure: {
-        grade: m.grade,
-        time: m.time.localtime.strftime("#{measure_day} %-H시"),
+        grade: measure.grade,
+        time: measure.time.localtime.strftime("#{measure_day} %-H시"),
       },
       forecasts: {
         time: f.date.localtime.strftime("#{forecast_day} %H시"),
         today: {
           grade: f.today_grade,
-          province_grade: f.today_grade_of(s.province),
+          province_grade: f.today_grade_of(station.province),
         },
         tomorrow: {
           grade: f.tomorrow_grade || '17시에 발표',
-          province_grade: f.tomorrow_grade_of(s.province),
+          province_grade: f.tomorrow_grade_of(station.province),
         }
       }
     }

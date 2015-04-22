@@ -51,8 +51,8 @@
 
 <% content_for :head_end do %>
 <script>
-<% if @user.station_id %>
-var stationId = '<%= @user.station_id %>';
+<% if @station %>
+var stationId = '<%= @station.id.to_s %>';
 <% else %>
 var stationId = null;
 <% end %>
