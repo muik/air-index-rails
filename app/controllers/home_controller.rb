@@ -14,9 +14,16 @@ class HomeController < ApplicationController
       render json: get_response(station, measure)
     else
       if station_id
-        station = Station.find station_id
-        measure = station.last_measure
-        @data = get_response(station, measure)
+        begin
+          station = Station.find station_id
+        rescue Mongoid::Errors::DocumentNotFound => e
+          cookies.delete :station_id
+          station_id = nil
+        end
+        if station
+          measure = station.last_measure
+          @data = get_response(station, measure)
+        end
       end
     end
   end

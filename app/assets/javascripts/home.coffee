@@ -68,21 +68,7 @@ $ ->
     nearStationConfirm.click(() ->
       showMeasure(response, true)
       $('#near_station_confirm').slideUp()
-
-      $.ajax({
-        type: 'PATCH',
-        url: '/users/me.json',
-        data: {
-          user: {
-            station_id: response['station']['id']
-          }
-        },
-        success: () ->
-          return false;
-        ,
-        error: () ->
-          return false
-      });
+      $.cookie('station_id', response['station']['id'], { expires: 10 })
       return false;
     )
 
