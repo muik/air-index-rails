@@ -51,14 +51,11 @@
 
 <% content_for :head_end do %>
 <script>
-<% if @station %>
-var stationId = '<%= @station.id.to_s %>';
-<% else %>
-var stationId = null;
-<% end %>
 <% if @data %>
+var stationId = '<%= @data[:station_id] %>';
 var response = <%= raw @data.to_json %>;
 <% else %>
+var stationId = null;
 var response = null;
 <% end %>
 </script>

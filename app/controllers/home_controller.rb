@@ -14,9 +14,9 @@ class HomeController < ApplicationController
       render json: get_response(station, measure)
     else
       if station_id
-        @station = Station.find station_id
-        @measure = @station.last_measure
-        @data = get_response(@station, @measure)
+        station = Station.find station_id
+        measure = station.last_measure
+        @data = get_response(station, measure)
       end
     end
   end
