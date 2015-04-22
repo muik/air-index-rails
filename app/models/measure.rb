@@ -13,5 +13,7 @@ class Measure
       # 10008: PM2.5
   belongs_to :station
 
+  scope :recent, ->{ order_by(time: -1) }
+
   index({ station_id: 1, time: -1 }, { unique: true })
 end

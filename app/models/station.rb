@@ -39,8 +39,8 @@ class Station
       strip
   end
 
-  def get_last_measure
-    Measure.where(station_id: id).order_by(time: -1).first
+  def last_measure
+    measures.recent.first
   end
 
   def set_province

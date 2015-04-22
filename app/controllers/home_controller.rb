@@ -10,12 +10,12 @@ class HomeController < ApplicationController
         station_id = station.id.to_s
         cookies[:station_id] = station_id
       end
-      measure = station.get_last_measure
+      measure = station.last_measure
       render json: get_response(station, measure)
     else
       if station_id
         @station = Station.find station_id
-        @measure = @station.get_last_measure
+        @measure = @station.last_measure
         @data = get_response(@station, @measure)
       end
     end
@@ -24,7 +24,7 @@ class HomeController < ApplicationController
   private
   def get_response(station, measure)
     measure_day = get_day_text(measure.time)
-    f = Forecast.order_by(date: -1).first
+    f = Forecast.recent.first
     forecast_day = get_day_text(f.date)
 
     {

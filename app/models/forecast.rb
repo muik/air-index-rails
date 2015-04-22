@@ -9,6 +9,8 @@ class Forecast
   field :tomorrow_table, type: Hash
   field :tomorrow_analysis, type: String
 
+  scope :recent, ->{ order_by(date: -1) }
+
   index({ date: -1 }, { unique: true, background: true })
 
   def today_grade_of(province)
