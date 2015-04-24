@@ -7,7 +7,7 @@ if @environment != 'staging'
     runner 'MeasureCrawler::perform_all'
   end
 
-  every '0 5,11,17,23 * * *' do
+  every '0,5 * * * *' do
     runner 'ForecastCrawler::perform_async'
   end
 end
