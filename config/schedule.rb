@@ -3,7 +3,7 @@ if @environment != 'staging'
     runner 'RegionCrawler::perform_async'
   end
 
-  every :hour do
+  every '0,10 * * * *' do
     runner 'MeasureCrawler::perform_all'
   end
 
