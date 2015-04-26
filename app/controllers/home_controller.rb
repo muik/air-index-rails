@@ -66,7 +66,7 @@ class HomeController < ApplicationController
     elsif past_days == 1
       day = '어제'
     else
-      day = "#{past_days}일 전"
+      day = "#{past_days.to_i}일 전"
     end
     day
   end
