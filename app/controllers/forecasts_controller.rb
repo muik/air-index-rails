@@ -1,4 +1,4 @@
-class ForecastsController < ApplicationController
+class ForecastsController < AdminController
   before_action :set_forecast, only: [:show, :edit, :update, :destroy]
 
   # GET /forecasts

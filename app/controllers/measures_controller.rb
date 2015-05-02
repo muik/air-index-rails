@@ -1,4 +1,4 @@
-class MeasuresController < ApplicationController
+class MeasuresController < AdminController
   before_action :set_measure, only: [:show, :edit, :update, :destroy]
 
   # GET /measures

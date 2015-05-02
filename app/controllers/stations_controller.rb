@@ -1,4 +1,4 @@
-class StationsController < ApplicationController
+class StationsController < AdminController
   before_action :set_station, only: [:show, :edit, :update, :destroy]
 
   # GET /stations

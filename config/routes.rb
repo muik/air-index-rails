@@ -1,13 +1,11 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :forecasts
   root 'home#index'
-  resources :home
 
   resources :users
-
   resources :measures
+  resources :forecasts
 
   resources :regions do
     resources :stations
@@ -17,7 +15,11 @@ Rails.application.routes.draw do
     resources :measures
   end
 
+  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+    username == ENV["ADMIN_USERNAME"] && password == ENV["ADMIN_PASSWORD"]
+  end if Rails.env.production?
   mount Sidekiq::Web => '/sidekiq'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
